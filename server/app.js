@@ -18,10 +18,16 @@ const requestCategoryRouter = require("./routers/requestCategory");
 const itemRouter = require("./routers/items");
 const rAssetRouter = require("./routers/requestAsset");
 const rAksiRouter = require("./routers/requestAksi");
+const chatRouter = require("./routers/chats");
+const menuRouter = require("./routers/menu");
+const notifRouter = require("./routers/notif");
+const groupMessageRouter = require("./routers/groupMessages");
 /* end */
 
 /* Model */
 const Msg = require("./models/message");
+const Chats = require("./models/chats");
+const message = require("./models/message");
 /* End */
 
 mongoose.connect(url, {
@@ -45,10 +51,14 @@ app.use("/profile", profileRouter);
 app.use("/users", userRouter);
 app.use("/categorys", categoryRouter);
 app.use("/status", statusRouter);
-app.use("/requestcategory", requestCategoryRouter);
+app.use("/reqcategory", requestCategoryRouter);
 app.use("/items", itemRouter);
 app.use("/reqasset", rAssetRouter);
 app.use("/raksi", rAksiRouter);
+app.use("/chats", chatRouter);
+app.use("/menu", menuRouter);
+app.use("/notif", notifRouter);
+app.use("/gmessage", groupMessageRouter);
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
@@ -61,9 +71,16 @@ io.on("connection", (socket) => {
       io.emit("message", msg);
     });
   });
+
   Msg.find().then((res) => {
     socket.emit("allmessage", res);
   });
+
+  /* chating */
+  message.find().then((res) => {
+    socket.emit("showChats", res);
+  });
+  /* end */
 });
 
 http.listen(port, () => {

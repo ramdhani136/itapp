@@ -4,25 +4,28 @@ import { Footer, Header } from "../../components";
 import CreateBlog from "../CreateBlog";
 import DetailBlog from "../DetailBlog";
 import Home from "../Home";
+import './mainapp.scss';
 
 function MainApp() {
   return (
-    <div>
-      <Header />
-      <Router>
-        <Switch>
-          <Route path="/create-blog">
-            <CreateBlog />
-          </Route>
-          <Route path="/detail-blog">
-            <DetailBlog />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-      <Footer />
+    <div className="main-app-wrap">
+        <Header />
+      <div className="content-wrapper">
+        <Router>
+          <Switch>
+            <Route path="/create-blog">
+              <CreateBlog />
+            </Route>
+            <Route path="/detail-blog">
+              <DetailBlog />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+        <Footer />
     </div>
   );
 }

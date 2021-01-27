@@ -1,9 +1,17 @@
 import React from "react";
+import { Button } from "../../components";
 
 const Home = () => {
   return (
     <div>
-      <p>Home Page</p>
+      <div>
+        <Button title="Create Blog"/>
+      </div>
+      <p>Blog Content</p>
+      <p>Blog Content</p>
+      <p>Blog Content</p>
+      <p>Blog Content</p>
+      <p>Pagination</p>
     </div>
   );
 };

@@ -12,7 +12,11 @@ app.use(express.urlencoded({ useNewUrlParser: true }));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type", 'Authorization');
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type",
+    "Authorization"
+  );
   next();
 });
 
@@ -29,6 +33,7 @@ const chatRouter = require("./routers/chats");
 const menuRouter = require("./routers/menu");
 const notifRouter = require("./routers/notif");
 const groupMessageRouter = require("./routers/groupMessages");
+const blogRouter = require("./routers/blog");
 /* end */
 
 /* Model */
@@ -66,6 +71,7 @@ app.use("/chats", chatRouter);
 app.use("/menu", menuRouter);
 app.use("/notif", notifRouter);
 app.use("/gmessage", groupMessageRouter);
+app.use("/blog", blogRouter);
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
